@@ -32,7 +32,7 @@
         .container {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 12px 12px;
+            padding: 12px 8px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -40,13 +40,13 @@
 
         /* HEADER */
         .header {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 8px;
         }
 
         .header h1 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 300;
             letter-spacing: -0.5px;
             margin-bottom: 2px;
@@ -54,7 +54,7 @@
         }
 
         .header .subtitle {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-secondary);
             font-weight: 400;
             letter-spacing: 0.3px;
@@ -62,8 +62,8 @@
 
         /* STATUS LINE */
         .status {
-            margin-bottom: 8px;
-            font-size: 10px;
+            margin-bottom: 6px;
+            font-size: 9px;
             color: var(--text-tertiary);
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -73,12 +73,12 @@
         .mtd-banner {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 10px;
         }
 
         .mtd-card {
-            padding: 10px 12px;
+            padding: 10px;
             border-radius: 6px;
             border: none;
         }
@@ -92,16 +92,16 @@
         }
 
         .mtd-label {
-            font-size: 9px;
+            font-size: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             font-weight: 500;
         }
 
         .mtd-value {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 300;
             margin-bottom: 2px;
             letter-spacing: -0.5px;
@@ -109,32 +109,32 @@
         }
 
         .mtd-period {
-            font-size: 9px;
+            font-size: 8px;
             color: rgba(255, 255, 255, 0.6);
         }
 
         /* SUMMARY SECTION */
         .summary-section-title {
-            font-size: 9px;
+            font-size: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--text-tertiary);
-            margin-bottom: 6px;
-            margin-top: 8px;
+            margin-bottom: 5px;
+            margin-top: 6px;
             font-weight: 600;
         }
 
         .summary-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 6px;
+            margin-bottom: 6px;
         }
 
         .summary-card {
             border: none;
             border-radius: 4px;
-            padding: 8px 10px;
+            padding: 6px 8px;
             text-align: center;
         }
 
@@ -152,16 +152,16 @@
         }
 
         .summary-card .label {
-            font-size: 8px;
+            font-size: 7px;
             text-transform: uppercase;
             letter-spacing: 0.3px;
             color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 3px;
+            margin-bottom: 2px;
             font-weight: 500;
         }
 
         .summary-card .value {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 300;
             letter-spacing: -0.3px;
             color: #ffffff;
@@ -171,17 +171,18 @@
         .days-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 6px;
+            margin-bottom: 6px;
             flex: 1;
         }
 
         .day-box {
             border: none;
             border-radius: 4px;
-            padding: 8px;
+            padding: 6px;
             transition: all 0.2s ease;
             position: relative;
+            min-height: 0;
         }
 
         .day-box.profit {
@@ -198,26 +199,27 @@
         }
 
         .day-date {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.3px;
         }
 
         .day-content {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .entity-section {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            padding: 6px 0;
+            padding: 4px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            gap: 4px;
         }
 
         .entity-section:last-child {
@@ -225,27 +227,29 @@
         }
 
         .entity-label {
-            font-size: 10px;
+            font-size: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.3px;
             color: #ffffff;
             font-weight: 700;
+            flex-shrink: 0;
         }
 
         .entity-value {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
             letter-spacing: -0.2px;
             color: #ffffff;
+            text-align: right;
         }
 
         /* FOOTER */
         .footer {
             text-align: center;
             margin-top: auto;
-            padding-top: 8px;
+            padding-top: 6px;
             border-top: 1px solid var(--border-color);
-            font-size: 9px;
+            font-size: 8px;
             color: var(--text-tertiary);
         }
 
@@ -266,32 +270,169 @@
             .days-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+
+            .summary-bar {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .days-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 8px;
+                padding: 6px 6px;
             }
 
             .header h1 {
                 font-size: 18px;
             }
 
+            .header .subtitle {
+                font-size: 9px;
+            }
+
             .mtd-banner {
-                grid-template-columns: 1fr;
-                gap: 8px;
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+
+            .mtd-value {
+                font-size: 16px;
+            }
+
+            .mtd-label {
+                font-size: 7px;
             }
 
             .days-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
             }
 
             .summary-bar {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
+            }
+
+            .day-box {
+                padding: 5px;
+            }
+
+            .day-date {
+                font-size: 9px;
+                margin-bottom: 4px;
+            }
+
+            .entity-label {
+                font-size: 7px;
+            }
+
+            .entity-value {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 4px 4px;
+            }
+
+            .header h1 {
+                font-size: 16px;
+                margin-bottom: 1px;
+            }
+
+            .header .subtitle {
+                font-size: 8px;
+            }
+
+            .status {
+                font-size: 7px;
+            }
+
+            .mtd-banner {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .mtd-card {
+                padding: 8px;
             }
 
             .mtd-value {
-                font-size: 18px;
+                font-size: 14px;
+            }
+
+            .mtd-label {
+                font-size: 6px;
+            }
+
+            .mtd-period {
+                font-size: 7px;
+            }
+
+            .summary-section-title {
+                font-size: 7px;
+                margin-top: 4px;
+                margin-bottom: 4px;
+            }
+
+            .summary-bar {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4px;
+            }
+
+            .summary-card {
+                padding: 4px 6px;
+            }
+
+            .summary-card .label {
+                font-size: 6px;
+                margin-bottom: 1px;
+            }
+
+            .summary-card .value {
+                font-size: 11px;
+            }
+
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4px;
+                margin-bottom: 4px;
+            }
+
+            .day-box {
+                padding: 4px;
+            }
+
+            .day-date {
+                font-size: 8px;
+                margin-bottom: 3px;
+            }
+
+            .day-content {
+                gap: 3px;
+            }
+
+            .entity-section {
+                padding: 2px 0;
+            }
+
+            .entity-label {
+                font-size: 6px;
+            }
+
+            .entity-value {
+                font-size: 8px;
+            }
+
+            .footer {
+                font-size: 7px;
+                padding-top: 4px;
             }
         }
     </style>
