@@ -196,9 +196,9 @@
         }
 
         .day-box {
-            border: none;
-            border-radius: 2px;
-            padding: 2px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            padding: 4px 3px;
             transition: all 0.2s ease;
             position: relative;
             min-height: 0;
@@ -206,10 +206,12 @@
 
         .day-box.profit {
             background: linear-gradient(135deg, #0d5c2d 0%, #0a4620 100%);
+            border-color: rgba(16, 185, 129, 0.4);
         }
 
         .day-box.loss {
             background: linear-gradient(135deg, #5c0d0d 0%, #460a0a 100%);
+            border-color: rgba(239, 68, 68, 0.4);
         }
 
         .day-box:hover {
@@ -221,7 +223,7 @@
             font-size: 20px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 1px;
+            margin-bottom: 2px;
             text-transform: uppercase;
             letter-spacing: 0.2px;
             line-height: 1;
@@ -240,8 +242,9 @@
             flex-direction: column;
             padding: 0px;
             border-bottom: 0px;
-            line-height: 1;
+            line-height: 0.9;
             flex: 1;
+            margin: 0px;
         }
 
         .entity-section:last-child {
@@ -258,6 +261,8 @@
             letter-spacing: -0.2px;
             color: #ffffff;
             text-align: center;
+            margin: 0px;
+            padding: 0px;
         }
 
         /* FOOTER */
