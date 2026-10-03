@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-02T05:03:28.763959",
+  "last_updated": "2026-10-03T08:15:46.509023",
   "records": [
     {
       "date": "2026-09-01 00:00:00",
@@ -113,14 +113,14 @@
     },
     {
       "date": "2026-09-15 00:00:00",
-      "commission_and_fees_Entity_A": -68.84,
-      "gross_profit_or_loss_Entity_A": -830.0,
-      "option_premium_Entity_A": 2745.0,
-      "pnl_Entity_A": 1846.1599999999999,
       "commission_and_fees_Entity_B": -83.72,
       "gross_profit_or_loss_Entity_B": 660.0,
       "option_premium_Entity_B": 0.0,
-      "pnl_Entity_B": 576.28
+      "pnl_Entity_B": 576.28,
+      "commission_and_fees_Entity_A": -68.84,
+      "gross_profit_or_loss_Entity_A": -830.0,
+      "option_premium_Entity_A": 2745.0,
+      "pnl_Entity_A": 1846.1599999999999
     },
     {
       "date": "2026-09-16 00:00:00",
@@ -253,6 +253,17 @@
       "gross_profit_or_loss_Entity_A": -2420.0,
       "option_premium_Entity_A": 6321.0,
       "pnl_Entity_A": 3844.98
+    },
+    {
+      "date": "2026-10-02 00:00:00",
+      "commission_and_fees_Entity_B": -125.23,
+      "gross_profit_or_loss_Entity_B": -250.0,
+      "option_premium_Entity_B": -1740.0,
+      "pnl_Entity_B": -2115.23,
+      "commission_and_fees_Entity_A": -70.56,
+      "gross_profit_or_loss_Entity_A": 4000.0,
+      "option_premium_Entity_A": -9800.0,
+      "pnl_Entity_A": -5870.5599999999995
     }
   ]
 }
