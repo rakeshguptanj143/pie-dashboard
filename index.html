@@ -81,12 +81,14 @@
             letter-spacing: 0.2px;
             color: var(--text-secondary);
             font-weight: 500;
+            line-height: 1.2;
         }
 
         .kpi-value {
             font-size: 16px;
             font-weight: 600;
-            line-height: 1;
+            line-height: 1.1;
+            word-break: break-word;
         }
 
         .kpi-value.profit {
@@ -136,12 +138,14 @@
             color: var(--text-secondary);
             margin-bottom: 3px;
             font-weight: 500;
+            line-height: 1.2;
         }
 
         .summary-card .value {
             font-size: 14px;
             font-weight: 600;
-            line-height: 1;
+            line-height: 1.1;
+            word-break: break-word;
         }
 
         /* DAILY BREAKDOWN GRID */
@@ -173,7 +177,7 @@
             font-weight: 600;
             color: #000000;
             text-transform: uppercase;
-            line-height: 1;
+            line-height: 1.2;
         }
 
         .day-content {
@@ -208,6 +212,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.1;
+            word-break: break-word;
         }
 
         .entity-value.profit {
@@ -234,12 +239,14 @@
             color: var(--text-secondary);
         }
 
+        /* DESKTOP: 1400px and above */
         @media (max-width: 1400px) {
             .days-grid {
                 grid-template-columns: repeat(5, 1fr);
             }
         }
 
+        /* TABLET: 1200px - 1399px */
         @media (max-width: 1200px) {
             .days-grid {
                 grid-template-columns: repeat(4, 1fr);
@@ -247,19 +254,57 @@
 
             .kpi-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .kpi-card {
+                padding: 10px;
+            }
+
+            .kpi-value {
+                font-size: 18px;
             }
         }
 
+        /* TABLET: 992px - 1199px */
         @media (max-width: 992px) {
+            .container {
+                padding: 10px 10px;
+            }
+
             .days-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
             }
 
             .kpi-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .summary-bar {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .header h1 {
+                font-size: 16px;
+            }
+
+            .day-box {
+                padding: 8px;
+            }
+
+            .day-date {
+                font-size: 11px;
+            }
+
+            .entity-value {
+                font-size: 13px;
             }
         }
 
+        /* SMALL TABLET / LARGE PHONE: 768px - 991px */
         @media (max-width: 768px) {
             .container {
                 padding: 8px 8px;
@@ -267,65 +312,230 @@
 
             .header h1 {
                 font-size: 14px;
+                margin-bottom: 2px;
+            }
+
+            .header .subtitle {
+                font-size: 10px;
+            }
+
+            .status {
+                font-size: 9px;
+                margin-bottom: 4px;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                margin-bottom: 6px;
+            }
+
+            .kpi-card {
+                padding: 8px;
+            }
+
+            .kpi-label {
+                font-size: 8px;
+            }
+
+            .kpi-value {
+                font-size: 15px;
+            }
+
+            .kpi-period {
+                font-size: 7px;
+            }
+
+            .summary-section-title {
+                font-size: 8px;
+                margin-bottom: 4px;
+                margin-top: 4px;
+            }
+
+            .summary-bar {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                margin-bottom: 6px;
+            }
+
+            .summary-card {
+                padding: 6px;
+            }
+
+            .summary-card .label {
+                font-size: 7px;
+                margin-bottom: 2px;
+            }
+
+            .summary-card .value {
+                font-size: 13px;
             }
 
             .days-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 4px;
-            }
-
-            .kpi-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 4px;
-            }
-
-            .kpi-card {
-                padding: 6px;
+                gap: 6px;
+                margin-bottom: 6px;
             }
 
             .day-box {
-                padding: 6px;
+                padding: 8px;
+                gap: 3px;
             }
 
             .day-date {
-                font-size: 10px;
+                font-size: 11px;
+                margin-bottom: 2px;
+            }
+
+            .day-content {
+                gap: 4px;
+            }
+
+            .entity-label {
+                font-size: 7px;
+                margin-bottom: 1px;
             }
 
             .entity-value {
-                font-size: 12px;
+                font-size: 13px;
+            }
+
+            .footer {
+                font-size: 8px;
+                margin-top: 6px;
+                padding-top: 4px;
             }
         }
 
+        /* PHONE: 480px - 767px */
         @media (max-width: 480px) {
             .container {
                 padding: 6px 6px;
             }
 
+            .header {
+                margin-bottom: 6px;
+                padding-bottom: 4px;
+            }
+
             .header h1 {
-                font-size: 12px;
+                font-size: 13px;
                 margin-bottom: 1px;
+            }
+
+            .header .subtitle {
+                font-size: 9px;
+            }
+
+            .status {
+                font-size: 8px;
+                margin-bottom: 4px;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+                gap: 6px;
+                margin-bottom: 6px;
+            }
+
+            .kpi-card {
+                padding: 7px;
+                gap: 2px;
+            }
+
+            .kpi-label {
+                font-size: 8px;
+            }
+
+            .kpi-value {
+                font-size: 14px;
+            }
+
+            .kpi-period {
+                font-size: 7px;
+            }
+
+            .summary-section-title {
+                font-size: 8px;
+                margin-bottom: 3px;
+                margin-top: 4px;
+            }
+
+            .summary-bar {
+                grid-template-columns: 1fr 1fr;
+                gap: 4px;
+                margin-bottom: 4px;
+            }
+
+            .summary-card {
+                padding: 5px;
+            }
+
+            .summary-card .label {
+                font-size: 7px;
+                margin-bottom: 2px;
+            }
+
+            .summary-card .value {
+                font-size: 12px;
             }
 
             .days-grid {
                 grid-template-columns: 1fr;
                 gap: 4px;
-            }
-
-            .kpi-grid {
-                grid-template-columns: 1fr;
-                gap: 3px;
-            }
-
-            .kpi-card {
-                padding: 5px;
+                margin-bottom: 4px;
             }
 
             .day-box {
-                padding: 5px;
+                padding: 7px;
+                gap: 3px;
             }
 
             .day-date {
-                font-size: 9px;
+                font-size: 10px;
+                margin-bottom: 2px;
+            }
+
+            .day-content {
+                gap: 4px;
+            }
+
+            .entity-label {
+                font-size: 7px;
+                margin-bottom: 1px;
+            }
+
+            .entity-value {
+                font-size: 12px;
+            }
+
+            .footer {
+                font-size: 8px;
+                margin-top: 4px;
+                padding-top: 3px;
+            }
+        }
+
+        /* SMALL PHONE: Below 480px */
+        @media (max-width: 360px) {
+            .container {
+                padding: 4px 4px;
+            }
+
+            .header h1 {
+                font-size: 12px;
+            }
+
+            .header .subtitle {
+                font-size: 8px;
+            }
+
+            .kpi-value {
+                font-size: 13px;
+            }
+
+            .summary-card .value {
+                font-size: 11px;
             }
 
             .entity-value {
@@ -338,7 +548,7 @@
     <div class="container">
         <div class="header">
             <h1>P&L Dashboard</h1>
-            <p class="subtitle">Portfolio Performance Tracking</p>
+            <p class="subtitle">Portfolio Performance</p>
         </div>
 
         <div class="status" id="status">Loading...</div>
@@ -359,7 +569,7 @@
         </div>
 
         <div class="footer">
-            Last Updated: <span id="lastUpdated">—</span>
+            Updated: <span id="lastUpdated">—</span>
         </div>
     </div>
 
@@ -466,25 +676,25 @@
 
             const kpiHtml = `
                 <div class="kpi-card">
-                    <div class="kpi-label">Entity A - MTD (${monthName})</div>
+                    <div class="kpi-label">A MTD (${monthName})</div>
                     <div class="kpi-value ${entityAMtd >= 0 ? 'profit' : 'loss'}">
                         ${formatCurrency(entityAMtd)}
                     </div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-label">Entity B - MTD (${monthName})</div>
+                    <div class="kpi-label">B MTD (${monthName})</div>
                     <div class="kpi-value ${entityBMtd >= 0 ? 'profit' : 'loss'}">
                         ${formatCurrency(entityBMtd)}
                     </div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-label">Entity A - Prior (${priorMonthName})</div>
+                    <div class="kpi-label">A Prior (${priorMonthName})</div>
                     <div class="kpi-value ${entityAPrior >= 0 ? 'profit' : 'loss'}">
                         ${formatCurrency(entityAPrior)}
                     </div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-label">Entity B - Prior (${priorMonthName})</div>
+                    <div class="kpi-label">B Prior (${priorMonthName})</div>
                     <div class="kpi-value ${entityBPrior >= 0 ? 'profit' : 'loss'}">
                         ${formatCurrency(entityBPrior)}
                     </div>
@@ -500,19 +710,19 @@
 
             const summaryHtml = `
                 <div class="summary-card">
-                    <div class="label">Entity A 31D</div>
+                    <div class="label">A 31D</div>
                     <div class="value ${entityATotalPnl >= 0 ? 'profit' : 'loss'}" style="color: ${entityATotalPnl >= 0 ? '#10b981' : '#ef4444'}">
                         ${formatCurrency(entityATotalPnl)}
                     </div>
                 </div>
                 <div class="summary-card">
-                    <div class="label">Entity B 31D</div>
+                    <div class="label">B 31D</div>
                     <div class="value ${entityBTotalPnl >= 0 ? 'profit' : 'loss'}" style="color: ${entityBTotalPnl >= 0 ? '#10b981' : '#ef4444'}">
                         ${formatCurrency(entityBTotalPnl)}
                     </div>
                 </div>
                 <div class="summary-card">
-                    <div class="label">Combined 31D</div>
+                    <div class="label">Combined</div>
                     <div class="value ${combinedPnl >= 0 ? 'profit' : 'loss'}" style="color: ${combinedPnl >= 0 ? '#10b981' : '#ef4444'}">
                         ${formatCurrency(combinedPnl)}
                     </div>
