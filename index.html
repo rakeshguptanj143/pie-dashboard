@@ -656,8 +656,8 @@
             const sign = val < 0 ? '-' : '';
             const absVal = Math.abs(val);
             const formatted = new Intl.NumberFormat('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
                 useGrouping: false
             }).format(absVal);
             return sign + formatted;
