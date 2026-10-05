@@ -653,14 +653,14 @@
         }
 
         function formatCurrency(val) {
+            const sign = val < 0 ? '-' : '';
+            const absVal = Math.abs(val);
             const formatted = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
                 useGrouping: false
-            }).format(val);
-            return formatted;
+            }).format(absVal);
+            return sign + formatted;
         }
 
         function formatDate(dateStr) {
