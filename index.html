@@ -653,7 +653,7 @@
         }
 
         function formatCurrency(val) {
-            const sign = val < 0 ? '-' : '';
+            const sign = val < 0 ? '-$' : '$';
             const absVal = Math.abs(val);
             const formatted = new Intl.NumberFormat('en-US', {
                 minimumFractionDigits: 0,
