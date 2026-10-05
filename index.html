@@ -653,12 +653,14 @@
         }
 
         function formatCurrency(val) {
-            return new Intl.NumberFormat('en-US', {
+            const formatted = new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'USD',
                 minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+                maximumFractionDigits: 2,
+                useGrouping: false
             }).format(val);
+            return formatted;
         }
 
         function formatDate(dateStr) {
