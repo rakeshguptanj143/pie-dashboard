@@ -698,38 +698,27 @@
             });
         }
 
-        function getLast31Days(records) {
-            if (records.length <= 31) return records;
-            return records.slice(-31);
-        }
+        function getMonthlyRolling(records) {
+            // Show current month + previous month, keeping max ~31 trading days
+            if (records.length === 0) return records;
 
-        function renderDashboard() {
-            if (!globalData || globalData.records.length === 0) {
-                document.getElementById('status').textContent = 'No data';
-                return;
+            const lastRecord = records[records.length - 1];
+            const currentMonth = new Date(lastRecord.date).getMonth();
+            const currentYear = new Date(lastRecord.date).getFullYear();
+
+            // Get all current month records
+            const currentMonthRecords = records.filter(record => {
+                const recordDate = new Date(record.date);
+                return recordDate.getMonth() === currentMonth && recordDate.getFullYear() === currentYear;
+            });
+
+            // If we have 31+ records already, just return current month
+            if (currentMonthRecords.length >= 31) {
+                return currentMonthRecords;
             }
 
-            const last31Records = getLast31Days(globalData.records);
-
-            if (globalData.last_updated) {
-                document.getElementById('lastUpdated').textContent = new Date(globalData.last_updated).toLocaleString();
-            }
-
-            renderKPIGrid(last31Records);
-            renderSummaryBar(last31Records);
-            renderDayBoxes(last31Records);
-
-            document.getElementById('status').textContent = `${last31Records.length} days (rolling)`;
-        }
-
-        function renderKPIGrid(last31Records) {
-            // Within rolling 31-day window, separate by calendar month
-            const currentMonth = last31Records.length > 0 ?
-                new Date(last31Records[last31Records.length - 1].date).getMonth() :
-                new Date().getMonth();
-            const currentYear = last31Records.length > 0 ?
-                new Date(last31Records[last31Records.length - 1].date).getFullYear() :
-                new Date().getFullYear();
+            // Calculate how many previous month records to include
+            const neededRecords = 31 - currentMonthRecords.length;
 
             let priorMonth = currentMonth - 1;
             let priorYear = currentYear;
@@ -738,13 +727,56 @@
                 priorYear--;
             }
 
-            // Filter by calendar month within the rolling window
-            const monthRecords = last31Records.filter(record => {
+            const priorMonthRecords = records.filter(record => {
+                const recordDate = new Date(record.date);
+                return recordDate.getMonth() === priorMonth && recordDate.getFullYear() === priorYear;
+            });
+
+            // Take only the last N records from prior month
+            const priorMonthPortion = priorMonthRecords.slice(-neededRecords);
+
+            // Combine: prior month portion + current month
+            return [...priorMonthPortion, ...currentMonthRecords];
+        }
+
+        function renderDashboard() {
+            if (!globalData || globalData.records.length === 0) {
+                document.getElementById('status').textContent = 'No data';
+                return;
+            }
+
+            const rollingRecords = getMonthlyRolling(globalData.records);
+
+            if (globalData.last_updated) {
+                document.getElementById('lastUpdated').textContent = new Date(globalData.last_updated).toLocaleString();
+            }
+
+            renderKPIGrid(rollingRecords);
+            renderSummaryBar(rollingRecords);
+            renderDayBoxes(rollingRecords);
+
+            document.getElementById('status').textContent = `${rollingRecords.length} days (monthly rolling)`;
+        }
+
+        function renderKPIGrid(rollingRecords) {
+            // Separate current month and prior month within the rolling data
+            const lastRecord = rollingRecords[rollingRecords.length - 1];
+            const currentMonth = new Date(lastRecord.date).getMonth();
+            const currentYear = new Date(lastRecord.date).getFullYear();
+
+            let priorMonth = currentMonth - 1;
+            let priorYear = currentYear;
+            if (priorMonth < 0) {
+                priorMonth = 11;
+                priorYear--;
+            }
+
+            const monthRecords = rollingRecords.filter(record => {
                 const recordDate = new Date(record.date);
                 return recordDate.getMonth() === currentMonth && recordDate.getFullYear() === currentYear;
             });
 
-            const priorMonthRecords = last31Records.filter(record => {
+            const priorMonthRecords = rollingRecords.filter(record => {
                 const recordDate = new Date(record.date);
                 return recordDate.getMonth() === priorMonth && recordDate.getFullYear() === priorYear;
             });
