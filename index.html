@@ -835,7 +835,7 @@
         }
 
         function renderDayBoxes(records) {
-            const daysHtml = records.map(record => {
+            const daysHtml = [...records].reverse().map(record => {
                 const date = record.date;
                 const entityAPnl = record['pnl_Entity_A'] || 0;
                 const entityBPnl = record['pnl_Entity_B'] || 0;
