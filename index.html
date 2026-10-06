@@ -699,44 +699,9 @@
         }
 
         function getMonthlyRolling(records) {
-            // Show current month + previous month, keeping max ~24 trading days
-            if (records.length === 0) return records;
-
-            const lastRecord = records[records.length - 1];
-            const currentMonth = new Date(lastRecord.date).getMonth();
-            const currentYear = new Date(lastRecord.date).getFullYear();
-
-            // Get all current month records
-            const currentMonthRecords = records.filter(record => {
-                const recordDate = new Date(record.date);
-                return recordDate.getMonth() === currentMonth && recordDate.getFullYear() === currentYear;
-            });
-
-            // If we have 24+ records already, just return current month
-            if (currentMonthRecords.length >= 24) {
-                return currentMonthRecords;
-            }
-
-            // Calculate how many previous month records to include
-            const neededRecords = 24 - currentMonthRecords.length;
-
-            let priorMonth = currentMonth - 1;
-            let priorYear = currentYear;
-            if (priorMonth < 0) {
-                priorMonth = 11;
-                priorYear--;
-            }
-
-            const priorMonthRecords = records.filter(record => {
-                const recordDate = new Date(record.date);
-                return recordDate.getMonth() === priorMonth && recordDate.getFullYear() === priorYear;
-            });
-
-            // Take only the last N records from prior month
-            const priorMonthPortion = priorMonthRecords.slice(-neededRecords);
-
-            // Combine: prior month portion + current month
-            return [...priorMonthPortion, ...currentMonthRecords];
+            // Rolling 24-day window: as current month grows, previous month rolls off
+            if (records.length <= 24) return records;
+            return records.slice(-24);
         }
 
         function renderDashboard() {
