@@ -699,7 +699,7 @@
         }
 
         function getMonthlyRolling(records) {
-            // Show current month + previous month, keeping max ~31 trading days
+            // Show current month + previous month, keeping max ~24 trading days
             if (records.length === 0) return records;
 
             const lastRecord = records[records.length - 1];
@@ -712,13 +712,13 @@
                 return recordDate.getMonth() === currentMonth && recordDate.getFullYear() === currentYear;
             });
 
-            // If we have 31+ records already, just return current month
-            if (currentMonthRecords.length >= 31) {
+            // If we have 24+ records already, just return current month
+            if (currentMonthRecords.length >= 24) {
                 return currentMonthRecords;
             }
 
             // Calculate how many previous month records to include
-            const neededRecords = 31 - currentMonthRecords.length;
+            const neededRecords = 24 - currentMonthRecords.length;
 
             let priorMonth = currentMonth - 1;
             let priorYear = currentYear;
@@ -815,11 +815,11 @@
 
             const summaryHtml = `
                 <div class="summary-card">
-                    <div class="label">A 31D</div>
+                    <div class="label">A 24D</div>
                     <div class="value" style="color: ${entityATotalPnl >= 0 ? '#10b981' : '#ef4444'}">${formatCurrency(entityATotalPnl)}</div>
                 </div>
                 <div class="summary-card">
-                    <div class="label">B 31D</div>
+                    <div class="label">B 24D</div>
                     <div class="value" style="color: ${entityBTotalPnl >= 0 ? '#10b981' : '#ef4444'}">${formatCurrency(entityBTotalPnl)}</div>
                 </div>
                 <div class="summary-card">
