@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-06T13:24:01.004566",
+  "last_updated": "2026-10-06T13:45:12.979525",
   "records": [
     {
       "date": "2026-09-01 00:00:00",
@@ -267,10 +267,14 @@
     },
     {
       "date": "2026-10-05 00:00:00",
-      "commission_and_fees_Entity_B": -71.39,
-      "gross_profit_or_loss_Entity_B": 360.0,
-      "option_premium_Entity_B": 1520.0,
-      "pnl_Entity_B": 1808.6100000000001
+      "commission_and_fees_Entity_B": -35.38,
+      "gross_profit_or_loss_Entity_B": -2670.0,
+      "option_premium_Entity_B": 1025.0,
+      "pnl_Entity_B": -1680.38,
+      "commission_and_fees_Entity_A": -34.16,
+      "gross_profit_or_loss_Entity_A": 1480.0,
+      "option_premium_Entity_A": 1100.0,
+      "pnl_Entity_A": 2545.84
     }
   ]
 }
