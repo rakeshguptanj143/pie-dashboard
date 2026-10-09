@@ -83,6 +83,62 @@
             color: var(--text-primary);
         }
 
+        #kpiGrid {
+            grid-template-columns: 0.9fr repeat(3, 1fr);
+            gap: 3px;
+        }
+
+        .mx-head {
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 3px 0;
+            line-height: 1;
+        }
+
+        .mx-head:first-child {
+            text-align: left;
+        }
+
+        .mx-cell {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            padding: 5px 4px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .mx-cell.profit {
+            color: var(--success);
+        }
+
+        .mx-cell.loss {
+            color: var(--danger);
+        }
+
+        .mx-foot {
+            font-size: 9px;
+            color: var(--text-secondary);
+            margin: 4px 0 6px;
+        }
+
+        .mx-foot span {
+            font-weight: 600;
+        }
+
+        .mx-foot span.profit {
+            color: var(--success);
+        }
+
+        .mx-foot span.loss {
+            color: var(--danger);
+        }
+
         /* KPI GRID */
         .kpi-grid {
             display: grid;
@@ -236,11 +292,10 @@
         }
 
         .day-content {
-            display: flex;
-            flex-direction: row;
-            gap: 4px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2px;
             align-items: center;
-            justify-content: space-between;
         }
 
         .entity-section {
@@ -634,10 +689,7 @@
         <div class="kpi-grid" id="kpiGrid">
             <div class="loading">Loading...</div>
         </div>
-
-        <!-- SUMMARY METRICS -->
-        <div class="summary-section-title">31-Day Summary</div>
-        <div class="summary-bar" id="summaryBar"></div>
+        <div class="mx-foot" id="combined"></div>
 
         <!-- DAILY BREAKDOWN -->
         <div class="summary-section-title">Daily P&L</div>
@@ -737,7 +789,6 @@
             }
 
             renderKPIGrid(rollingRecords);
-            renderSummaryBar(rollingRecords);
             renderDayBoxes(rollingRecords);
 
             document.getElementById('status').textContent = `${rollingRecords.length} days (monthly rolling)`;
@@ -768,33 +819,23 @@
 
             const sumPnl = (recs, key) => recs.reduce((sum, r) => sum + (r[`pnl_${key}`] || 0), 0);
 
-            const kpiHtml = ENTITIES.flatMap(([letter, key]) => [
-                { label: `${letter} MTD`, value: sumPnl(monthRecords, key) },
-                { label: `${letter} Prior`, value: sumPnl(priorMonthRecords, key) }
-            ]).map(({ label, value }) => `
-                <div class="kpi-card">
-                    <div class="kpi-label">${label}</div>
-                    <div class="kpi-value ${value >= 0 ? 'profit' : 'loss'}">${formatCurrency(value)}</div>
-                </div>
-            `).join('');
-            document.getElementById('kpiGrid').innerHTML = kpiHtml;
-        }
-
-        function renderSummaryBar(records) {
-            const totals = ENTITIES.map(([letter, key]) => ({
-                label: `${letter} 24D`,
-                value: records.reduce((sum, r) => sum + (r[`pnl_${key}`] || 0), 0)
-            }));
-            const combinedPnl = totals.reduce((sum, t) => sum + t.value, 0);
-            totals.push({ label: 'Combined', value: combinedPnl });
-
-            const summaryHtml = totals.map(({ label, value }) => `
-                <div class="summary-card">
-                    <div class="label">${label}</div>
-                    <div class="value" style="color: ${value >= 0 ? '#10b981' : '#ef4444'}">${formatCurrency(value)}</div>
-                </div>
-            `).join('');
-            document.getElementById('summaryBar').innerHTML = summaryHtml;
+            const cell = value => `<div class="mx-cell ${value >= 0 ? 'profit' : 'loss'}">${formatCurrency(value)}</div>`;
+            const periods = [
+                ['MTD', monthRecords],
+                ['Prior', priorMonthRecords],
+                ['24-Day', rollingRecords]
+            ];
+            document.getElementById('kpiGrid').innerHTML = `
+                <div class="mx-head"></div>
+                ${ENTITIES.map(([letter]) => `<div class="mx-head">${letter}</div>`).join('')}
+                ${periods.map(([name, recs]) => `
+                    <div class="mx-head">${name}</div>
+                    ${ENTITIES.map(([, key]) => cell(sumPnl(recs, key))).join('')}
+                `).join('')}
+            `;
+            const combined = sumPnl(rollingRecords, 'Entity_A') + sumPnl(rollingRecords, 'Entity_B') + sumPnl(rollingRecords, 'Entity_C');
+            document.getElementById('combined').innerHTML =
+                `Combined 24-day: <span class="${combined >= 0 ? 'profit' : 'loss'}">${formatCurrency(combined)}</span>`;
         }
 
         function renderDayBoxes(records) {
