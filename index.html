@@ -70,6 +70,19 @@
             margin-bottom: 4px;
         }
 
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px 10px;
+            font-size: 9px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .legend b {
+            color: var(--text-primary);
+        }
+
         /* KPI GRID */
         .kpi-grid {
             display: grid;
@@ -610,6 +623,12 @@
         </div>
 
         <div class="status" id="status">Loading...</div>
+
+        <div class="legend">
+            <span><b>A</b> Futures account</span>
+            <span><b>B</b> Futures account</span>
+            <span><b>C</b> Retirement account (from Oct 1, 2026)</span>
+        </div>
 
         <!-- KPI GRID -->
         <div class="kpi-grid" id="kpiGrid">
