@@ -663,9 +663,55 @@
             .summary-card .value {
                 font-size: 8px;
             }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-y: auto;
+            }
+
+            html, body {
+                height: auto;
+            }
+
+            .container {
+                height: auto;
+                overflow: visible;
+                padding: 6px;
+            }
+
+            #kpiGrid {
+                grid-template-columns: 0.9fr repeat(3, 1fr) !important;
+                gap: 3px !important;
+            }
+
+            .mx-cell {
+                font-size: 12px;
+                padding: 5px 2px;
+            }
+
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 5px !important;
+                overflow: visible !important;
+                max-height: none !important;
+            }
+
+            .days-section {
+                overflow: visible !important;
+            }
+
+            .day-box {
+                padding: 5px;
+            }
+
+            .day-content {
+                gap: 2px;
+            }
 
             .entity-value {
-                font-size: 7px;
+                font-size: 11px;
+                white-space: nowrap;
             }
         }
     </style>
