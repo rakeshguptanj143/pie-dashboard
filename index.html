@@ -73,7 +73,7 @@
         /* KPI GRID */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 4px;
             margin-bottom: 6px;
             flex-shrink: 0;
@@ -635,6 +635,7 @@
 
     <script>
         let globalData = null;
+        const ENTITIES = [['A', 'Entity_A'], ['B', 'Entity_B'], ['C', 'Entity_C']];
 
         window.addEventListener('load', () => {
             loadDataAuto();
@@ -746,77 +747,53 @@
                 return recordDate.getMonth() === priorMonth && recordDate.getFullYear() === priorYear;
             });
 
-            const entityAMtd = monthRecords.reduce((sum, r) => sum + (r['pnl_Entity_A'] || 0), 0);
-            const entityBMtd = monthRecords.reduce((sum, r) => sum + (r['pnl_Entity_B'] || 0), 0);
+            const sumPnl = (recs, key) => recs.reduce((sum, r) => sum + (r[`pnl_${key}`] || 0), 0);
 
-            const entityAPrior = priorMonthRecords.reduce((sum, r) => sum + (r['pnl_Entity_A'] || 0), 0);
-            const entityBPrior = priorMonthRecords.reduce((sum, r) => sum + (r['pnl_Entity_B'] || 0), 0);
-
-            const kpiHtml = `
+            const kpiHtml = ENTITIES.flatMap(([letter, key]) => [
+                { label: `${letter} MTD`, value: sumPnl(monthRecords, key) },
+                { label: `${letter} Prior`, value: sumPnl(priorMonthRecords, key) }
+            ]).map(({ label, value }) => `
                 <div class="kpi-card">
-                    <div class="kpi-label">A MTD</div>
-                    <div class="kpi-value ${entityAMtd >= 0 ? 'profit' : 'loss'}">${formatCurrency(entityAMtd)}</div>
+                    <div class="kpi-label">${label}</div>
+                    <div class="kpi-value ${value >= 0 ? 'profit' : 'loss'}">${formatCurrency(value)}</div>
                 </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">B MTD</div>
-                    <div class="kpi-value ${entityBMtd >= 0 ? 'profit' : 'loss'}">${formatCurrency(entityBMtd)}</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">A Prior</div>
-                    <div class="kpi-value ${entityAPrior >= 0 ? 'profit' : 'loss'}">${formatCurrency(entityAPrior)}</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">B Prior</div>
-                    <div class="kpi-value ${entityBPrior >= 0 ? 'profit' : 'loss'}">${formatCurrency(entityBPrior)}</div>
-                </div>
-            `;
+            `).join('');
             document.getElementById('kpiGrid').innerHTML = kpiHtml;
         }
 
         function renderSummaryBar(records) {
-            const entityATotalPnl = records.reduce((sum, r) => sum + (r['pnl_Entity_A'] || 0), 0);
-            const entityBTotalPnl = records.reduce((sum, r) => sum + (r['pnl_Entity_B'] || 0), 0);
-            const combinedPnl = entityATotalPnl + entityBTotalPnl;
+            const totals = ENTITIES.map(([letter, key]) => ({
+                label: `${letter} 24D`,
+                value: records.reduce((sum, r) => sum + (r[`pnl_${key}`] || 0), 0)
+            }));
+            const combinedPnl = totals.reduce((sum, t) => sum + t.value, 0);
+            totals.push({ label: 'Combined', value: combinedPnl });
 
-            const summaryHtml = `
+            const summaryHtml = totals.map(({ label, value }) => `
                 <div class="summary-card">
-                    <div class="label">A 24D</div>
-                    <div class="value" style="color: ${entityATotalPnl >= 0 ? '#10b981' : '#ef4444'}">${formatCurrency(entityATotalPnl)}</div>
+                    <div class="label">${label}</div>
+                    <div class="value" style="color: ${value >= 0 ? '#10b981' : '#ef4444'}">${formatCurrency(value)}</div>
                 </div>
-                <div class="summary-card">
-                    <div class="label">B 24D</div>
-                    <div class="value" style="color: ${entityBTotalPnl >= 0 ? '#10b981' : '#ef4444'}">${formatCurrency(entityBTotalPnl)}</div>
-                </div>
-                <div class="summary-card">
-                    <div class="label">Combined</div>
-                    <div class="value" style="color: ${combinedPnl >= 0 ? '#10b981' : '#ef4444'}">${formatCurrency(combinedPnl)}</div>
-                </div>
-                <div class="summary-card">
-                    <div class="label">Days</div>
-                    <div class="value">${records.length}</div>
-                </div>
-            `;
+            `).join('');
             document.getElementById('summaryBar').innerHTML = summaryHtml;
         }
 
         function renderDayBoxes(records) {
             const daysHtml = [...records].reverse().map(record => {
                 const date = record.date;
-                const entityAPnl = record['pnl_Entity_A'] || 0;
-                const entityBPnl = record['pnl_Entity_B'] || 0;
+                const sections = ENTITIES.map(([letter, key]) => {
+                    const pnl = record[`pnl_${key}`] || 0;
+                    return `
+                            <div class="entity-section">
+                                <div class="entity-label">${letter}</div>
+                                <div class="entity-value ${pnl >= 0 ? 'profit' : 'loss'}">${formatCurrency(pnl)}</div>
+                            </div>`;
+                }).join('');
 
                 return `
                     <div class="day-box">
                         <div class="day-date">${formatDate(date)}</div>
-                        <div class="day-content">
-                            <div class="entity-section">
-                                <div class="entity-label">A</div>
-                                <div class="entity-value ${entityAPnl >= 0 ? 'profit' : 'loss'}">${formatCurrency(entityAPnl)}</div>
-                            </div>
-                            <div class="entity-section">
-                                <div class="entity-label">B</div>
-                                <div class="entity-value ${entityBPnl >= 0 ? 'profit' : 'loss'}">${formatCurrency(entityBPnl)}</div>
-                            </div>
+                        <div class="day-content">${sections}
                         </div>
                     </div>
                 `;
